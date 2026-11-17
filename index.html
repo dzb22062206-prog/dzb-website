@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebStudio — создание сайтов под ключ за 2-3 дня</title>
+<meta name="description" content="Создаю сайты под ключ за 2-3 дня. Лендинги, визитки, интернет-магазины. Звоните: +7 928 870-86-87">
+<style>
+:root{
+  --bg:#0a0e1a; --bg2:#111827; --card:#151d2e;
+  --text:#e8ecf4; --muted:#9aa5b8;
+  --accent:#6c5ce7; --accent2:#00d2ff; --red:#ff4757;
+  --grad:linear-gradient(135deg,#6c5ce7,#00d2ff);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;
+  overflow-x:hidden;
+}
+img{max-width:100%}
+.container{width:min(1150px,92%);margin:0 auto}
+
+/* ===== фоновые пятна ===== */
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.28;z-index:-1;pointer-events:none}
+.blob1{width:480px;height:480px;background:#6c5ce7;top:-140px;left:-120px;animation:float1 16s ease-in-out infinite}
+.blob2{width:420px;height:420px;background:#00d2ff;bottom:-120px;right:-100px;animation:float2 20s ease-in-out infinite}
+.blob3{width:300px;height:300px;background:#ff4757;top:45%;left:65%;opacity:.14;animation:float1 24s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,50px)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,-70px)}}
+
+/* ===== шапка ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,14,26,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{font-weight:800;font-size:1.25rem;text-decoration:none;color:var(--text);white-space:nowrap}
+.logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.95rem;position:relative;transition:color .25s}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--grad);transition:width .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-actions{display:flex;gap:9px;align-items:center;flex-shrink:0}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 18px;border-radius:12px;text-decoration:none;font-weight:600;
+  font-size:.9rem;transition:transform .2s,box-shadow .25s,background .25s;
+  cursor:pointer;border:none;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.07);color:var(--text)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.btn-wa{background:#25d366;color:#06250f}
+.btn-wa:hover{box-shadow:0 8px 24px rgba(37,211,102,.35)}
+.btn-yt{background:#ff0000;color:#fff}
+.btn-yt:hover{box-shadow:0 8px 24px rgba(255,0,0,.4)}
+.btn-phone{background:var(--grad);color:#fff;box-shadow:0 4px 20px rgba(108,92,231,.4);animation:pulse 2.2s infinite}
+.btn-phone:hover{box-shadow:0 8px 30px rgba(108,92,231,.6)}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(108,92,231,.4)}50%{box-shadow:0 4px 32px rgba(108,92,231,.75)}}
+.btn svg{width:17px;height:17px;fill:currentColor;flex-shrink:0}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{display:block;width:24px;height:2.5px;background:var(--text);margin:5px 0;border-radius:2px;transition:.3s}
+.mobile-menu{
+  display:none;flex-direction:column;gap:4px;
+  background:rgba(10,14,26,.97);padding:16px 4%;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text);text-decoration:none;padding:12px 10px;border-radius:10px;font-weight:500}
+.mobile-menu a:hover{background:rgba(255,255,255,.07)}
+
+/* ===== hero ===== */
+.hero{min-height:100svh;display:flex;align-items:center;text-align:center;padding:110px 0 60px}
+.badge{
+  display:inline-block;padding:8px 20px;border-radius:100px;
+  background:rgba(108,92,231,.15);border:1px solid rgba(108,92,231,.4);
+  color:#b8aaff;font-size:.9rem;font-weight:600;margin-bottom:24px;
+}
+h1{font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.15;font-weight:800;margin-bottom:16px}
+.grad-text{
+  background:linear-gradient(90deg,#6c5ce7,#00d2ff,#ff4757,#6c5ce7);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:shine 7s linear infinite;
+}
+@keyframes shine{to{background-position:300% 0}}
+.typed-wrap{font-size:clamp(1.05rem,2.6vw,1.4rem);color:var(--muted);min-height:1.8em;margin-bottom:26px}
+.typed-wrap .cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent2);vertical-align:-3px;animation:blink .8s step-end infinite;margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+.hero-btns .btn{padding:14px 30px;font-size:1rem}
+
+/* ===== статистика ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:820px;margin:0 auto}
+.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:22px 10px;transition:transform .3s,border-color .3s}
+.stat:hover{transform:translateY(-5px);border-color:rgba(108,92,231,.5)}
+.stat b{font-size:clamp(1.5rem,4vw,2.2rem);display:block;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat small{color:var(--muted);font-size:.85rem}
+
+/* ===== секции ===== */
+section{padding:90px 0}
+.section-head{text-align:center;margin-bottom:50px}
+.section-head h2{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;margin-bottom:10px}
+.section-head p{color:var(--muted);font-size:1.05rem}
+
+/* карточки услуг */
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.card{
+  position:relative;overflow:hidden;
+  background:var(--card);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);padding:32px 26px;
+  transition:transform .35s,box-shadow .35s,border-color .35s;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 44px rgba(0,0,0,.45);border-color:rgba(108,92,231,.5)}
+.card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(108,92,231,.14),transparent 45%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.card:hover::before{opacity:1}
+.card .icon{
+  width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:var(--grad);margin-bottom:18px;transition:transform .5s;
+}
+.card:hover .icon{transform:rotateY(360deg)}
+.card .icon svg{width:26px;height:26px;fill:#fff}
+.card h3{font-size:1.25rem;margin-bottom:10px}
+.card p{color:var(--muted);font-size:.95rem}
+
+/* цены */
+.price-tag{font-size:1.9rem;font-weight:800;margin:14px 0 4px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.price-note{color:var(--muted);font-size:.85rem;margin-bottom:16px}
+.card ul{list-style:none;margin:0 0 20px}
+.card ul li{padding:7px 0;color:var(--muted);font-size:.94rem;display:flex;gap:9px;align-items:flex-start}
+.card ul li::before{content:'✓';color:var(--accent2);font-weight:700;flex-shrink:0}
+.card .btn{width:100%}
+.card.popular{border-color:rgba(108,92,231,.6)}
+.pop-label{
+  position:absolute;top:16px;right:-34px;transform:rotate(45deg);
+  background:var(--grad);color:#fff;font-size:.72rem;font-weight:700;
+  padding:4px 40px;letter-spacing:.5px;
+}
+.price-term{display:inline-block;margin-bottom:6px;background:rgba(0,210,255,.12);color:var(--accent2);padding:4px 12px;border-radius:100px;font-size:.8rem;font-weight:700}
+
+/* этапы */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;counter-reset:step}
+.step{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:28px 22px;position:relative;transition:transform .3s,border-color .3s}
+.step:hover{transform:translateY(-6px);border-color:rgba(0,210,255,.5)}
+.step::before{
+  counter-increment:step;content:'0' counter(step);
+  font-size:2.6rem;font-weight:800;position:absolute;top:14px;right:18px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:.35;
+}
+.step h4{font-size:1.1rem;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.92rem}
+.step .time{display:inline-block;margin-top:10px;color:var(--accent2);font-weight:700;font-size:.83rem}
+
+/* форма */
+.form-wrap{
+  max-width:620px;margin:0 auto;background:var(--card);
+  border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:38px clamp(20px,5vw,44px);
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+.form-wrap h2{text-align:center;font-size:clamp(1.5rem,3.5vw,2rem);margin-bottom:8px}
+.form-wrap>p{text-align:center;color:var(--muted);margin-bottom:26px;font-size:.95rem}
+.field{margin-bottom:16px}
+.field input,.field textarea{
+  width:100%;padding:14px 16px;border-radius:12px;
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.12);
+  color:var(--text);font-size:1rem;font-family:inherit;transition:border-color .25s,box-shadow .25s;
+}
+.field input:focus,.field textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,92,231,.22);
+}
+.field textarea{resize:vertical;min-height:100px}
+.form-btn{width:100%;padding:15px;font-size:1.05rem;border-radius:12px}
+
+/* подвал */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:44px 0 30px;text-align:center}
+.contact-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+footer .copy{color:var(--muted);font-size:.85rem;margin-top:18px}
+.footer-phone{display:block;font-size:1.4rem;font-weight:800;color:var(--text);text-decoration:none;margin-top:10px}
+.footer-phone:hover{color:var(--accent2)}
+
+/* кнопка наверх */
+#toTop{
+  position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;
+  background:var(--grad);border:none;cursor:pointer;z-index:99;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;
+  box-shadow:0 8px 24px rgba(108,92,231,.45);
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{transform:translateY(-4px)}
+#toTop svg{width:20px;height:20px;fill:#fff}
+
+/* ===== анимации появления ===== */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+
+/* ===== мобильная адаптация ===== */
+@media (max-width:860px){
+  .nav-links{display:none}
+  .nav-actions .btn-ghost{display:none}
+  .burger{display:block}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  section{padding:64px 0}
+}
+@media (max-width:520px){
+  .nav{height:58px}
+  .logo{font-size:1.05rem}
+  .nav-actions .btn span{display:none}       /* остаются только иконки */
+  .nav-actions .btn{padding:10px 12px}
+  .hero{padding:96px 0 50px}
+  .hero-btns .btn{width:100%;max-width:320px}
+  .card,.step{padding:24px 18px}
+  .form-wrap{padding:28px 18px}
+  .price-tag{font-size:1.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">Web<span>Studio</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#prices">Цены</a></li>
+      <li><a href="#steps">Как работаем</a></li>
+      <li><a href="#contact">Заявка</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="tel:+79288708687" aria-label="Позвонить">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+        <span>Позвонить</span>
+      </a>
+      <a class="btn btn-wa" href="https://wa.me/79288708687" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2.3.1 1.7.8 2 1 .3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a class="btn btn-yt" href="https://youtube.com/@dzb-z2w?si=NcEV7xqCjt1B9_kk" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+        <span>YouTube</span>
+      </a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#services">Услуги</a>
+    <a href="#prices">Цены</a>
+    <a href="#steps">Как работаем</a>
+    <a href="#contact">Заявка</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ГЕРОЙ -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge reveal">⚡ Сайт под ключ за 2–3 дня</span>
+      <h1 class="reveal d1">Делаю сайты, которые<br><span class="grad-text">приносят клиентов</span></h1>
+      <p class="typed-wrap reveal d2"><span id="typed"></span><span class="cursor"></span></p>
+      <div class="hero-btns reveal d3">
+        <a class="btn btn-phone" href="tel:+79288708687">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+          Позвонить сейчас
+        </a>
+        <a class="btn btn-wa" href="https://wa.me/79288708687">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2.3.1 1.7.8 2 1 .3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg>
+          Написать в WhatsApp
+        </a>
+      </div>
+      <div class="stats reveal d4">
+        <div class="stat"><b data-count="120">0</b><small>сайтов сделано</small></div>
+        <div class="stat"><b data-count="3" data-suffix=" дня">0</b><small>средний срок</small></div>
+        <div class="stat"><b data-count="98" data-suffix="%">0</b><small>довольных клиентов</small></div>
+        <div class="stat"><b data-count="24" data-suffix="/7">0</b><small>на связи</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- УСЛУГИ -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Что я делаю</h2>
+        <p>От простого лендинга до полноценного интернет-магазина</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 4h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm1 2v3h16V6H4zm0 5v7h16v-7H4zm2 2h7v2H6v-2z"/></svg></div>
+          <h3>Лендинг под ключ</h3>
+          <p>Одностраничный сайт для продажи товара или услуги. Дизайн, вёрстка, мобильная версия — всё включено.</p>
+        </div>
+        <div class="card reveal d1">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 2 8l10 6 10-6-10-6zM2 12l10 6 10-6M2 16l10 6 10-6"/></svg></div>
+          <h3>Сайт-визитка</h3>
+          <p>Представление вашей компании в интернете: о нас, услуги, портфолио и контакты. Стильно и по делу.</p>
+        </div>
+        <div class="card reveal d2">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7.2 14.8l-.1.2h11.4L21 8H7.4L6.5 5H2v2h3l2.4 7.2c-.9.3-1.4 1.2-1.4 2.1V18h14v-2H7.2z"/></svg></div>
+          <h3>Интернет-магазин</h3>
+          <p>Каталог товаров, корзина и приём заказов. Продаёт, пока вы занимаетесь своими делами.</p>
+        </div>
+        <div class="card reveal d1">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
+          <h3>Доработка сайта</h3>
+          <p>Правки, новые блоки, ускорение загрузки, адаптация под телефоны на вашем текущем сайте.</p>
+        </div>
+        <div class="card reveal d2">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4 14h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V6h8v2z"/></svg></div>
+          <h3>Портфолио и резюме</h3>
+          <p>Сайт, который выделит вас среди других: работы, отзывы и форма связи в одном месте.</p>
+        </div>
+        <div class="card reveal d3">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 5h10v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg></div>
+          <h3>Наполнение контентом</h3>
+          <p>Тексты, фото и структура страниц — чтобы сайт не просто был, а работал на вас.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЦЕНЫ -->
+  <section id="prices">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Цены и сроки</h2>
+        <p>Никаких «уточним после брифа» — цена и срок известны сразу</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal">
+          <span class="price-term">Готово за 2 дня</span>
+          <h3>Лендинг</h3>
+          <div class="price-tag">от 7 000 ₽</div>
+          <p class="price-note">срок: 2 дня</p>
+          <ul>
+            <li>Адаптив под телефон</li>
+            <li>Форма заявки + WhatsApp</li>
+            <li>1–2 правки бесплатно</li>
+          </ul>
+          <a class="btn btn-wa" href="https://wa.me/79288708687">Заказать</a>
+        </div>
+        <div class="card popular reveal d1">
+          <span class="pop-label">Хит</span>
+          <span class="price-term">Готово за 3 дня</span>
+          <h3>Сайт-визитка</h3>
+          <div class="price-tag">от 12 000 ₽</div>
+          <p class="price-note">срок: 3 дня</p>
+          <ul>
+            <li>До 5 страниц</li>
+            <li>Уникальный дизайн</li>
+            <li>Подключение домена</li>
+            <li>3 правки бесплатно</li>
+          </ul>
+          <a class="btn btn-phone" href="tel:+79288708687">Заказать</a>
+        </div>
+        <div class="card reveal d2">
+          <span class="price-term">От 3 дней</span>
+          <h3>Интернет-магазин</h3>
+          <div class="price-tag">от 25 000 ₽</div>
+          <p class="price-note">срок: от 3 дней</p>
+          <ul>
+            <li>Каталог и корзина</li>
+            <li>Приём заявок в WhatsApp</li>
+            <li>Обучение работе с сайтом</li>
+          </ul>
+          <a class="btn btn-wa" href="https://wa.me/79288708687">Заказать</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЭТАПЫ -->
+  <section id="steps">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Как проходит работа</h2>
+        <p>От звонка до готового сайта — максимум 3 дня</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <h4>Звонок или сообщение</h4>
+          <p>Вы звоните или пишете в WhatsApp, рассказываем о задаче. Бесплатно обсуждаем идею.</p>
+          <span class="time">30 минут</span>
+        </div>
+        <div class="step reveal d1">
+          <h4>Дизайн и согласование</h4>
+          <p>Показываю макет будущего сайта. Вносим правки, пока вам всё не понравится.</p>
+          <span class="time">1 день</span>
+        </div>
+        <div class="step reveal d2">
+          <h4>Вёрстка и запуск</h4>
+          <p>Собираю сайт, подключаю форму и WhatsApp, адаптирую под телефоны.</p>
+          <span class="time">1–2 дня</span>
+        </div>
+        <div class="step reveal d3">
+          <h4>Передача и поддержка</h4>
+          <p>Показываю, как пользоваться сайтом, и остаюсь на связи после сдачи.</p>
+          <span class="time">всегда</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЗАЯВКА -->
+  <section id="contact">
+    <div class="container">
+      <div class="form-wrap reveal">
+        <h2>Оставить заявку</h2>
+        <p>Заполните форму — она отправится прямо мне в WhatsApp. Отвечаю быстро.</p>
+        <form id="leadForm">
+          <div class="field"><input type="text" id="name" placeholder="Ваше имя" required></div>
+          <div class="field"><input type="tel" id="phone" placeholder="Телефон" required></div>
+          <div class="field"><textarea id="msg" placeholder="Что за сайт нужен? (необязательно)"></textarea></div>
+          <button type="submit" class="btn btn-wa form-btn">Отправить в WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contacts">
+  <div class="container">
+    <h3 class="reveal">Связаться со мной</h3>
+    <div class="contact-row reveal d1">
+      <a class="btn btn-wa" href="https://wa.me/79288708687" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.3.7-.2.3.1 1.7.8 2 1 .3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg>
+        WhatsApp
+      </a>
+      <a class="btn btn-yt" href="https://youtube.com/@dzb-z2w?si=NcEV7xqCjt1B9_kk" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+        Мой YouTube
+      </a>
+      <a class="btn btn-ghost" href="tel:+79288708687">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+        Позвонить
+      </a>
+    </div>
+    <a class="footer-phone reveal d2" href="tel:+79288708687">+7 928 870-86-87</a>
+    <p class="copy">© 2026 WebStudio · Сайты под ключ за 2–3 дня</p>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Наверх">
+  <svg viewBox="0 0 24 24"><path d="m12 6 7 7-1.4 1.4L13 9.8V20h-2V9.8l-4.6 4.6L5 13z"/></svg>
+</button>
+
+<script>
+// мобильное меню
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>mm.classList.toggle('open'));
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.remove('open')));
+
+// печатающийся текст
+const phrases=['Лендинг под ключ — за 2 дня','Интернет-магазин — от 3 дней','Адаптив под телефоны — включён','Первый клиент — уже на этой неделе'];
+let pi=0,ci=0,del=false;
+const typedEl=document.getElementById('typed');
+(function type(){
+  const p=phrases[pi];
+  typedEl.textContent=p.slice(0,ci);
+  if(!del){ci++;if(ci>p.length){del=true;return setTimeout(type,1800)}}
+  else{ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length}}
+  setTimeout(type,del?30:65);
+})();
+
+// появление блоков при скролле
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}
+}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// счётчики
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target,target=+el.dataset.count,sfx=el.dataset.suffix||'';
+  const t0=performance.now(),dur=1400;
+  (function tick(t){
+    const k=Math.min((t-t0)/dur,1);
+    el.textContent=Math.round(target*(1-Math.pow(1-k,3)))+sfx;
+    if(k<1)requestAnimationFrame(tick);
+  })(t0);
+  cio.unobserve(el);
+}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// блик за курсором на карточках
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    c.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+});
+
+// форма → WhatsApp
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=document.getElementById('name').value.trim();
+  const p=document.getElementById('phone').value.trim();
+  const m=document.getElementById('msg').value.trim();
+  const text=encodeURIComponent(`Здравствуйте! Меня зовут ${n}. Хочу заказать сайт. Телефон: ${p}.${m?' Задача: '+m:''}`);
+  window.open('https://wa.me/79288708687?text='+text,'_blank');
+});
+
+// кнопка наверх
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>toTop.classList.toggle('show',scrollY>600),{passive:true});
+toTop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
